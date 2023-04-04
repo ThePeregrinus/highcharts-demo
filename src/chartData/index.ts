@@ -5,7 +5,7 @@ interface ICharData {
 
 const createCharData = (n: number) => ({
   title: {
-    text: `Chart${n}`,
+    text: `Chart${n + 1}`,
   },
 
   series: [

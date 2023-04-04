@@ -3,21 +3,14 @@ import Grid from '@mui/material/Grid'; // Grid version 1
 
 import './App.css';
 
-import { Chart } from './components/Chart';
-import { listOfCharts } from './chartData';
+import { GridCharts } from './components/GridCharts';
 
-function App() {
+const App = () => {
   return (
     <>
-      <Grid container>
-        {listOfCharts.map((el) => (
-          <Grid xs={12} sm={6} md={3}>
-            <Chart {...el} />
-          </Grid>
-        ))}
-      </Grid>
+      <GridCharts />
     </>
   );
-}
+};
 
 export default App;
