@@ -17,7 +17,10 @@ export const Header = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
             {namePages.map((page) => (
               <Button key={page} sx={{ color: 'white', display: 'block' }}>
-                <Link to={PagesConfig[page as keyof typeof PagesConfig]}>
+                <Link
+                  to={PagesConfig[page as keyof typeof PagesConfig]}
+                  style={{ color: 'white', textDecoration: 'none' }}
+                >
                   {page}
                 </Link>
               </Button>
