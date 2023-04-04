@@ -1,15 +1,17 @@
-import React from 'react';
-import Grid from '@mui/material/Grid'; // Grid version 1
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ViewMode } from './pages/VewMode';
+import { Route, Routes } from 'react-router-dom';
 
-import { GridCharts } from './components/GridCharts';
 import { Header } from './components/Header';
+import { ViewMode } from './pages/VewMode';
+import { Setting } from './pages/Settings';
 
 const App = () => {
   return (
     <>
       <Header />
+      <Routes>
+        <Route path="/" element={<ViewMode />} />
+        <Route path="/settings" element={<Setting />} />
+      </Routes>
     </>
   );
 };
