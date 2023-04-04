@@ -19,8 +19,8 @@ const createCharData = (n: number) => ({
   },
 });
 
-export const listOfCharts: Array<ICharData> = [];
+export const charts: Array<ICharData> = [];
 
 for (let i = 0; i <= 20; i++) {
-  listOfCharts.push(createCharData(i));
+  charts.push(createCharData(i));
 }

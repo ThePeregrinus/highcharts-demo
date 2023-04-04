@@ -1,3 +1,10 @@
+import { ListCharts } from '../../components/ListCharts';
+import { useContext, useEffect, useState } from 'react';
+
+import { Context } from '../../App';
+
 export const Setting = () => {
-  return <>Settings will be here</>;
+  const value = useContext(Context);
+
+  return <ListCharts />;
 };

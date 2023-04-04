@@ -5,7 +5,6 @@ import HighchartsReact from 'highcharts-react-official';
 export const Chart = (props: HighchartsReact.Props) => {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
-  console.log(props);
   return (
     <div>
       <HighchartsReact
