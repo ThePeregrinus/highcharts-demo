@@ -5,7 +5,8 @@ import { Context } from '../../App';
 
 export const ListCharts = () => {
   const value = useContext(Context);
-
+  console.log(value.chartsState);
+  console.log(123);
   return (
     <Grid
       container
@@ -16,7 +17,7 @@ export const ListCharts = () => {
       style={{ minHeight: '100vh' }}
     >
       <Grid item xs={3}>
-        <h1>{value.chartState[0].title.text}</h1>
+        {value.chartsState.map((el) => el.title.text)}
       </Grid>
     </Grid>
   );

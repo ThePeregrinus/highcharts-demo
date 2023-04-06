@@ -1,4 +1,25 @@
 import { CHART_CONFIG } from './chart-config';
+
+export interface IChart {
+  title: {
+    text: string;
+  };
+  legend: {
+    enabled: boolean;
+  };
+  series: {
+    color: string;
+    type: string;
+    name: string;
+    pointInterval: number;
+    pointStart: number;
+    data: number[];
+  }[];
+  xAxis: {
+    type: string;
+  };
+}
+
 let data: Array<number> = [];
 
 const createCharData = (n: number) => {
@@ -37,7 +58,7 @@ const createCharData = (n: number) => {
   };
 };
 
-export const charts: Array<any> = [];
+export const charts: Array<IChart> = [];
 
 for (let i = 0; i < 20; i++) {
   charts.push(createCharData(i));

@@ -6,11 +6,17 @@ import { ViewMode } from './pages/VewMode';
 import { Setting } from './pages/Settings';
 import { charts } from './chartData';
 
-export const Context = createContext({});
+import { IChart } from './chartData';
+
+interface ChartContextType {
+  chartsState: IChart[];
+  setChartsState: React.Dispatch<React.SetStateAction<IChart[]>>;
+}
+
+export const Context = createContext({} as ChartContextType);
 
 const App = () => {
-  const [chartState, setChartState] = useState(charts);
-
+  const [chartsState, setChartsState] = useState(charts);
   return (
     <>
       <Header />
@@ -18,7 +24,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Context.Provider value={{ chartState, setChartState }}>
+            <Context.Provider value={{ chartsState, setChartsState }}>
               <ViewMode />
             </Context.Provider>
           }
@@ -26,7 +32,7 @@ const App = () => {
         <Route
           path="/settings"
           element={
-            <Context.Provider value={{ chartState, setChartState }}>
+            <Context.Provider value={{ chartsState, setChartsState }}>
               <Setting />
             </Context.Provider>
           }
