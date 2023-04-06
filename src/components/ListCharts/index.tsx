@@ -5,8 +5,14 @@ import { Context } from '../../App';
 
 export const ListCharts = () => {
   const value = useContext(Context);
-  console.log(value.chartsState);
-  console.log(123);
+
+  const deleteByIndex = (index: number) => {
+    console.log(value);
+    value.setChartsState((oldValues) => {
+      return oldValues.filter((_, i) => i !== index);
+    });
+  };
+
   return (
     <Grid
       container
@@ -16,9 +22,11 @@ export const ListCharts = () => {
       justifyContent="center"
       style={{ minHeight: '100vh' }}
     >
-      <Grid item xs={3}>
-        {value.chartsState.map((el) => el.title.text)}
-      </Grid>
+      {value.chartsState.map((el, id) => (
+        <Grid item onClick={() => deleteByIndex(id)}>
+          {el.title.text}
+        </Grid>
+      ))}
     </Grid>
   );
 };
