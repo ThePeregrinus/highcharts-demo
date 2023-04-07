@@ -23,7 +23,11 @@ export const ListCharts = () => {
       style={{ minHeight: '100vh' }}
     >
       {value.chartsState.map((el, id) => (
-        <Grid item onClick={() => deleteByIndex(id)}>
+        <Grid
+          item
+          onClick={() => deleteByIndex(id)}
+          style={{ cursor: 'pointer', userSelect: 'none' }}
+        >
           {el.title.text}
         </Grid>
       ))}
