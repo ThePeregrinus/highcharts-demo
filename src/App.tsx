@@ -8,7 +8,7 @@ import { charts } from './chartData';
 
 import { IChart } from './chartData';
 
-interface ChartContextType {
+export interface ChartContextType {
   chartsState: IChart[];
   setChartsState: React.Dispatch<React.SetStateAction<IChart[]>>;
 }

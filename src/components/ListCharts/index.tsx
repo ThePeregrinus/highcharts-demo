@@ -17,15 +17,16 @@ export const ListCharts = () => {
   const value = useContext(Context);
 
   const deleteByIndex = (index: number) => {
-    console.log(value);
     value.setChartsState((oldValues) => {
       return oldValues.filter((_, i) => i !== index);
     });
   };
 
   const [open, setOpen] = useState(false);
+  const [id, setId] = useState(-1);
 
-  const handleOpen = () => {
+  const handleOpen = (id: number) => {
+    setId(id);
     setOpen(true);
     console.log(1);
   };
@@ -36,7 +37,13 @@ export const ListCharts = () => {
 
   return (
     <>
-      <ModalSettings open={open} setOpen={setOpen} handleClose={handleClose} />
+      <ModalSettings
+        open={open}
+        id={id}
+        setOpen={setOpen}
+        handleClose={handleClose}
+        value={value}
+      />
       <Grid
         container
         spacing={0}
@@ -48,7 +55,7 @@ export const ListCharts = () => {
         {value.chartsState.map((el, id) => (
           <Grid
             item
-            onClick={() => handleOpen()}
+            onClick={() => handleOpen(id)}
             style={{ cursor: 'pointer', userSelect: 'none' }}
           >
             {el.title.text}
