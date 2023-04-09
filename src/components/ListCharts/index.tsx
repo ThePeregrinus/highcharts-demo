@@ -28,7 +28,6 @@ export const ListCharts = () => {
   const handleOpen = (id: number) => {
     setId(id);
     setOpen(true);
-    console.log(1);
   };
 
   const handleClose = () => {
@@ -49,6 +48,7 @@ export const ListCharts = () => {
           <Grid
             item
             onClick={() => handleOpen(id)}
+            key={id}
             style={{ cursor: 'pointer', userSelect: 'none' }}
           >
             {el.title.text}

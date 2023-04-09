@@ -35,7 +35,6 @@ export const ModalSettings = (props: {
   const changeDatas = () => {
     props.value.setChartsState(
       props.value.chartsState.map((el, ind): IChart => {
-        console.log(el);
         if (props.id !== ind) {
           return el;
         } else {
