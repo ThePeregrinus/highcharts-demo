@@ -37,13 +37,6 @@ export const ListCharts = () => {
 
   return (
     <>
-      <ModalSettings
-        open={open}
-        id={id}
-        setOpen={setOpen}
-        handleClose={handleClose}
-        value={value}
-      />
       <Grid
         container
         spacing={0}
@@ -62,6 +55,16 @@ export const ListCharts = () => {
           </Grid>
         ))}
       </Grid>
+
+      {open && (
+        <ModalSettings
+          open={open}
+          id={id}
+          setOpen={setOpen}
+          handleClose={handleClose}
+          value={value}
+        />
+      )}
     </>
   );
 };

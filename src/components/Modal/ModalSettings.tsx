@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Dialog,
   DialogActions,
@@ -5,10 +6,14 @@ import {
   DialogTitle,
   Typography,
   Button,
+  DialogContentText,
+  TextField,
+  MenuItem,
 } from '@mui/material';
 
-import { ChartContextType } from '../../App';
+import { CHART_CONFIG } from '../../chartData/chart-config';
 import { IChart } from '../../chartData';
+import { ChartContextType } from '../../App';
 
 export const ModalSettings = (props: {
   open: boolean;
@@ -17,6 +22,16 @@ export const ModalSettings = (props: {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleClose: () => void;
 }) => {
+  const [name, setName] = useState(
+    props.value.chartsState[props.id].title.text
+  );
+  const [type, setType] = useState(
+    props.value.chartsState[props.id].series[0].type
+  );
+  const [color, setColor] = useState(
+    props.value.chartsState[props.id].series[0].color
+  );
+
   const changeDatas = () => {
     props.value.setChartsState(
       props.value.chartsState.map((el, ind): IChart => {
@@ -25,15 +40,15 @@ export const ModalSettings = (props: {
           return el;
         } else {
           return {
-            title: { text: `Chart ${ind + 1} fixed` },
+            title: { text: `${name}` },
             legend: {
               enabled: false,
             },
 
             series: [
               {
-                color: el.series[0].color,
-                type: el.series[0].type,
+                color: color,
+                type: type,
                 name: 'some useful value',
                 pointInterval: el.series[0].pointInterval,
                 pointStart: el.series[0].pointStart,
@@ -47,21 +62,62 @@ export const ModalSettings = (props: {
         }
       })
     );
-    //props.setOpen(false);
   };
 
   return (
-    <Dialog open={props.open}>
+    <Dialog open={props.open} fullWidth maxWidth="sm">
       <DialogTitle>
         <Typography variant="h4">Setting chart</Typography>
       </DialogTitle>
       <DialogContent>
-        <Typography variant="h6">
-          Are you sure you want to delete this user?
-        </Typography>
-        <Typography variant="subtitle2">
-          You can't undo this operation
-        </Typography>
+        <DialogContentText>Type new chart name</DialogContentText>
+        <TextField
+          autoFocus
+          margin="dense"
+          label={props.value.chartsState[props.id].title.text}
+          type="text"
+          fullWidth
+          variant="standard"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setName(event.target.value);
+          }}
+        />
+      </DialogContent>
+
+      <DialogContent>
+        <DialogContentText>Select new type</DialogContentText>
+        <TextField
+          margin="dense"
+          select
+          label={props.value.chartsState[props.id].series[0].type}
+          type="email"
+          fullWidth
+          variant="standard"
+          defaultValue={''}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setType(event.target.value);
+          }}
+        >
+          {CHART_CONFIG.TYPES.map((el: string, ind: number) => (
+            <MenuItem key={ind} value={el}>
+              {el}
+            </MenuItem>
+          ))}
+        </TextField>
+      </DialogContent>
+      <DialogContent>
+        <DialogContentText>Select new color</DialogContentText>
+        <TextField
+          margin="dense"
+          label={color}
+          type="color"
+          fullWidth
+          variant="standard"
+          value={color}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setColor(event.target.value);
+          }}
+        />
       </DialogContent>
       <DialogActions>
         <Button variant="contained" onClick={() => changeDatas()}>
