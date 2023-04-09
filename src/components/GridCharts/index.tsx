@@ -11,7 +11,7 @@ export const GridCharts = () => {
   return (
     <Grid container>
       {value.chartsState.map((el, ind) => (
-        <Grid xs={12} sm={6} key={ind}>
+        <Grid item xs={12} sm={6} key={ind}>
           <Chart {...el} />
         </Grid>
       ))}
