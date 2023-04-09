@@ -1,12 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography,
-  Button,
-} from '@mui/material';
+import { useContext, useState } from 'react';
 
 import Grid from '@mui/material/Grid';
 
