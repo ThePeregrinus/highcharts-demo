@@ -121,7 +121,11 @@ export const ModalSettings = (props: {
       <DialogActions>
         <Button
           variant="contained"
-          onClick={() => changeDatas(props.value, props.id, name, color, type)}
+          onClick={() =>
+            props.value.setChartsState(
+              changeDatas(props.value, props.id, name, color, type)
+            )
+          }
         >
           Save changes
         </Button>

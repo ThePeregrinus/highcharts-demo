@@ -1,12 +1,13 @@
 import { useContext } from 'react';
 
-import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid'; // Grid version 1
 
 import { Chart } from '../Chart';
 import { Context } from '../../App';
-
 import { CHART_CONFIG } from '../../chartData/chart-config';
+
+import { changeDatas } from '../../chartData/changeDatas';
+import { changeDatasEveryone } from '../../chartData/changeDatasEveryone';
 
 export const GridCharts = () => {
   const value = useContext(Context);
@@ -16,7 +17,7 @@ export const GridCharts = () => {
     start: number,
     end: number
   ) => {
-    points.filter((dot: Array<number>) => {
+    return points.filter((dot: Array<number>) => {
       return start <= dot[0] && dot[0] <= end;
     });
   };
@@ -25,16 +26,24 @@ export const GridCharts = () => {
     <>
       <div
         onClick={() => {
-          value.chartsState.map((el) => {
-            return sortByRange(
-              el.series[0].data,
-              CHART_CONFIG.DAY * 2,
-              CHART_CONFIG.DAY * 100
-            );
-          });
+          console.log(
+            value.setChartsState(
+              value.chartsState.map((el, ind) =>
+                changeDatasEveryone(
+                  value,
+                  ind,
+                  sortByRange(
+                    el.series[0].data,
+                    CHART_CONFIG.DAY * 20,
+                    CHART_CONFIG.DAY * 100
+                  )
+                )
+              )
+            )
+          );
         }}
       >
-        Click on me
+        betwen 20's and 100's days
       </div>
       <Grid container>
         {value.chartsState.map((el, ind) => (
