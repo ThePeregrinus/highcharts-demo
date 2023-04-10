@@ -22,9 +22,27 @@ export const GridCharts = () => {
     });
   };
 
+  const handleSort = () => {
+    console.log(
+      value.setChartsState(
+        value.chartsState.map((el, ind) =>
+          changeDatasEveryone(
+            value,
+            ind,
+            sortByRange(
+              el.series[0].data,
+              CHART_CONFIG.DAY * 300,
+              CHART_CONFIG.DAY * 320
+            )
+          )
+        )
+      )
+    );
+  };
+
   return (
     <>
-      <div
+      {/* <div
         onClick={() => {
           console.log(
             value.setChartsState(
@@ -34,13 +52,21 @@ export const GridCharts = () => {
                   ind,
                   sortByRange(
                     el.series[0].data,
-                    CHART_CONFIG.DAY * 20,
-                    CHART_CONFIG.DAY * 100
+                    CHART_CONFIG.DAY * 300,
+                    CHART_CONFIG.DAY * 320
                   )
                 )
               )
             )
           );
+        }}
+      >
+        betwen 20's and 100's days
+      </div> */}
+
+      <div
+        onClick={() => {
+          handleSort();
         }}
       >
         betwen 20's and 100's days
