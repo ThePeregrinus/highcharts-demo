@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid';
 import { Context } from '../../App';
 import { ModalSettings } from '../Modal/ModalSettings';
 
+import { IChart } from '../../chartData';
+
 export const ListCharts = () => {
   const value = useContext(Context);
 

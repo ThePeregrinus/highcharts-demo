@@ -11,26 +11,33 @@ export interface IChart {
     color: string;
     type: string;
     name: string;
-    pointInterval: number;
-    pointStart: number;
-    data: number[];
+    pointInterval?: number;
+    pointIntervalUnit?: string;
+    pointStart?: number;
+    data: number[][];
   }[];
   xAxis: {
-    type: string;
+    type?: string;
   };
 }
 
-let data: Array<number> = [];
+let data: Array<Array<number>> = [];
 
 const createCharData = (n: number) => {
   //generate one year dates for chart in interval (0.5,1)
+  // data = [];
+  // for (let i = 0; i < 100; i++) {
+  //   data.push(Math.random() * (1 - 0.5) + 0.5);
+  // }
+
   data = [];
-  for (let i = 0; i < 10; i++) {
-    data.push(Math.random() * (1 - 0.5) + 0.5);
+  for (let i = 0; i < 31 * 12 * 10; i++) {
+    data = [...data, [CHART_CONFIG.DAY * i, i]];
   }
 
   return {
     title: { text: `Chart ${n + 1}` },
+
     legend: {
       enabled: false,
     },
@@ -38,20 +45,23 @@ const createCharData = (n: number) => {
     series: [
       {
         //random color and type
-        color:
-          CHART_CONFIG.COLORS[
-            Math.floor(Math.random() * CHART_CONFIG.COLORS.length)
-          ],
-        type: CHART_CONFIG.TYPES[
-          Math.floor(Math.random() * CHART_CONFIG.TYPES.length)
-        ],
+        // color:
+        //   CHART_CONFIG.COLORS[
+        //     Math.floor(Math.random() * CHART_CONFIG.COLORS.length)
+        //   ],
+        color: CHART_CONFIG.COLORS[0],
+        // type: CHART_CONFIG.TYPES[
+        //   Math.floor(Math.random() * CHART_CONFIG.TYPES.length)
+        // ],
+        type: CHART_CONFIG.TYPES[0],
         name: 'some useful value',
-        pointInterval: 24 * 3600 * 1000,
+        //pointInterval: 24 * 3600 * 1000,
         //pointIntervalUnit: 'month',
-        pointStart: Date.UTC(1970, 0, 1),
+        //pointStart: Date.UTC(1970, 0, 1),
         data: data,
       },
     ],
+
     xAxis: {
       type: 'datetime',
     },

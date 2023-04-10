@@ -11,9 +11,9 @@ import {
   MenuItem,
 } from '@mui/material';
 
-import { CHART_CONFIG } from '../../chartData/chart-config';
-import { IChart } from '../../chartData';
 import { ChartContextType } from '../../App';
+import { changeDatas } from '../../chartData/changeDatas';
+import { CHART_CONFIG } from '../../chartData/chart-config';
 
 export const ModalSettings = (props: {
   open: boolean;
@@ -32,36 +32,36 @@ export const ModalSettings = (props: {
     props.value.chartsState[props.id].series[0].color
   );
 
-  const changeDatas = () => {
-    props.value.setChartsState(
-      props.value.chartsState.map((el, ind): IChart => {
-        if (props.id !== ind) {
-          return el;
-        } else {
-          return {
-            title: { text: `${name}` },
-            legend: {
-              enabled: false,
-            },
+  // const changeDatas = () => {
+  //   props.value.setChartsState(
+  //     props.value.chartsState.map((el, ind): IChart => {
+  //       if (props.id !== ind) {
+  //         return el;
+  //       } else {
+  //         return {
+  //           title: { text: `${name}` },
+  //           legend: {
+  //             enabled: false,
+  //           },
 
-            series: [
-              {
-                color: color,
-                type: type,
-                name: 'some useful value',
-                pointInterval: el.series[0].pointInterval,
-                pointStart: el.series[0].pointStart,
-                data: el.series[0].data,
-              },
-            ],
-            xAxis: {
-              type: 'datetime',
-            },
-          };
-        }
-      })
-    );
-  };
+  //           series: [
+  //             {
+  //               color: color,
+  //               type: type,
+  //               name: 'some useful value',
+  //               // pointInterval: el.series[0].pointInterval,
+  //               // pointStart: el.series[0].pointStart,
+  //               data: el.series[0].data,
+  //             },
+  //           ],
+  //           xAxis: {
+  //             type: 'datetime',
+  //           },
+  //         };
+  //       }
+  //     })
+  //   );
+  // };
 
   return (
     <Dialog open={props.open} fullWidth maxWidth="sm">
@@ -119,7 +119,10 @@ export const ModalSettings = (props: {
         />
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" onClick={() => changeDatas()}>
+        <Button
+          variant="contained"
+          onClick={() => changeDatas(props.value, props.id, name, color, type)}
+        >
           Save changes
         </Button>
         <Button

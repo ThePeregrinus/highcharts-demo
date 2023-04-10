@@ -12,4 +12,6 @@ export const CHART_CONFIG = {
     '#a6c96a',
   ],
   TYPES: ['line', 'spline', 'area'],
+
+  DAY: 24 * 3600 * 1000,
 };
