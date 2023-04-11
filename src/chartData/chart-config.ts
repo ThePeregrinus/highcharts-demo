@@ -14,5 +14,5 @@ export const CHART_CONFIG = {
   TYPES: ['line', 'spline', 'area'],
   DAY: 24 * 3600 * 1000,
   START_DEFAULT: 24 * 3600 * 1000,
-  END_DEFAULT: 100 * 24 * 3600 * 1000,
+  END_DEFAULT: 1000 * 24 * 3600 * 1000,
 };

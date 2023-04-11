@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 
 import Grid from '@mui/material/Grid'; // Grid version 1
 
@@ -9,8 +9,18 @@ import { CHART_CONFIG } from '../../chartData/chart-config';
 import { changeDatas } from '../../chartData/changeDatas';
 import { changeDatasEveryone } from '../../chartData/changeDatasEveryone';
 
+import { IChart } from '../../chartData';
+
 export const GridCharts = () => {
   const value = useContext(Context);
+
+  interface IStep {
+    start: number;
+    end: number;
+  }
+
+  const [switchSort, setSwitchSort] = useState(0);
+  const [step, setStep] = useState<IStep | undefined>(undefined);
 
   const sortByRange = (
     points: Array<Array<number>>,
@@ -23,58 +33,33 @@ export const GridCharts = () => {
   };
 
   const handleSort = () => {
-    console.log(
-      value.setChartsState(
-        value.chartsState.map((el, ind) =>
-          changeDatasEveryone(
-            value,
-            ind,
-            sortByRange(
-              el.series[0].data,
-              CHART_CONFIG.DAY * 300,
-              CHART_CONFIG.DAY * 320
-            )
-          )
-        )
-      )
-    );
+    setStep({ start: CHART_CONFIG.DAY * 80, end: CHART_CONFIG.DAY * 100 });
   };
 
   return (
     <>
-      {/* <div
-        onClick={() => {
-          console.log(
-            value.setChartsState(
-              value.chartsState.map((el, ind) =>
-                changeDatasEveryone(
-                  value,
-                  ind,
-                  sortByRange(
-                    el.series[0].data,
-                    CHART_CONFIG.DAY * 300,
-                    CHART_CONFIG.DAY * 320
-                  )
-                )
-              )
-            )
-          );
-        }}
-      >
-        betwen 20's and 100's days
-      </div> */}
-
       <div
         onClick={() => {
+          console.log(step);
           handleSort();
         }}
       >
-        betwen 20's and 100's days
+        click me
       </div>
+
       <Grid container>
-        {value.chartsState.map((el, ind) => (
+        {value.chartsState.map((el: IChart, ind: number) => (
           <Grid item xs={12} sm={6} key={ind}>
-            <Chart {...el} />
+            <Chart
+              {...changeDatasEveryone(
+                value.chartsState[ind],
+                sortByRange(
+                  el.series[0].data,
+                  step ? step.start : CHART_CONFIG.START_DEFAULT,
+                  step ? step.end : CHART_CONFIG.END_DEFAULT
+                )
+              )}
+            />
           </Grid>
         ))}
       </Grid>
