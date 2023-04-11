@@ -1,6 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState, createContext } from 'react';
 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 import { Header } from './components/Header';
 import { ViewMode } from './pages/VewMode';
 import { Setting } from './pages/Settings';
@@ -19,25 +22,27 @@ const App = () => {
   const [chartsState, setChartsState] = useState(charts);
   return (
     <>
-      <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Context.Provider value={{ chartsState, setChartsState }}>
-              <ViewMode />
-            </Context.Provider>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <Context.Provider value={{ chartsState, setChartsState }}>
-              <Setting />
-            </Context.Provider>
-          }
-        />
-      </Routes>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Context.Provider value={{ chartsState, setChartsState }}>
+                <ViewMode />
+              </Context.Provider>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <Context.Provider value={{ chartsState, setChartsState }}>
+                <Setting />
+              </Context.Provider>
+            }
+          />
+        </Routes>
+      </LocalizationProvider>
     </>
   );
 };

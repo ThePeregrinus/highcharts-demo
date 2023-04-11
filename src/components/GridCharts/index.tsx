@@ -1,6 +1,10 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 
 import Grid from '@mui/material/Grid'; // Grid version 1
+import dayjs, { Dayjs } from 'dayjs';
+
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { Chart } from '../Chart';
 import { Context } from '../../App';
@@ -20,7 +24,10 @@ export const GridCharts = () => {
   }
 
   const [switchSort, setSwitchSort] = useState(0);
-  const [step, setStep] = useState<IStep | undefined>(undefined);
+  const [step, setStep] = useState<IStep>({
+    start: CHART_CONFIG.DAY * 80,
+    end: CHART_CONFIG.DAY * 100,
+  });
 
   const sortByRange = (
     points: Array<Array<number>>,
@@ -33,7 +40,7 @@ export const GridCharts = () => {
   };
 
   const handleSort = () => {
-    setStep({ start: CHART_CONFIG.DAY * 80, end: CHART_CONFIG.DAY * 100 });
+    setStep({ start: CHART_CONFIG.DAY * 30, end: CHART_CONFIG.DAY * 70 });
   };
 
   return (
@@ -41,12 +48,31 @@ export const GridCharts = () => {
       <div
         onClick={() => {
           console.log(step);
-          handleSort();
+          // handleSort();
         }}
       >
         click me
       </div>
-
+      <DatePicker
+        minDate={dayjs('1970.01.01')}
+        maxDate={dayjs('1980.01.01')}
+        onChange={(el: Dayjs | null) => {
+          if (el) {
+            setStep({ start: el.valueOf(), end: step.end });
+            //console.log(el.valueOf());
+          }
+        }}
+      />
+      <DatePicker
+        minDate={dayjs('1970.01.01')}
+        maxDate={dayjs('1980.01.01')}
+        onChange={(el) => {
+          if (el) {
+            setStep({ start: step.start, end: el.valueOf() });
+            //console.log(el.valueOf());
+          }
+        }}
+      />
       <Grid container>
         {value.chartsState.map((el: IChart, ind: number) => (
           <Grid item xs={12} sm={6} key={ind}>
