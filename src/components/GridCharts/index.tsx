@@ -3,7 +3,6 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import Grid from '@mui/material/Grid'; // Grid version 1
 import dayjs, { Dayjs } from 'dayjs';
 
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { Chart } from '../Chart';
@@ -19,14 +18,14 @@ export const GridCharts = () => {
   const value = useContext(Context);
 
   interface IStep {
-    start: number;
-    end: number;
+    start: Dayjs;
+    end: Dayjs;
   }
 
-  const [switchSort, setSwitchSort] = useState(0);
+  const [isEmtpy, setIsEmtpy] = useState(false);
   const [step, setStep] = useState<IStep>({
-    start: CHART_CONFIG.DAY * 80,
-    end: CHART_CONFIG.DAY * 100,
+    start: CHART_CONFIG.START_DEFAULT,
+    end: CHART_CONFIG.END_DEFAULT,
   });
 
   const sortByRange = (
@@ -39,37 +38,25 @@ export const GridCharts = () => {
     });
   };
 
-  const handleSort = () => {
-    setStep({ start: CHART_CONFIG.DAY * 30, end: CHART_CONFIG.DAY * 70 });
-  };
-
   return (
     <>
-      <div
-        onClick={() => {
-          console.log(step);
-          // handleSort();
-        }}
-      >
-        click me
-      </div>
       <DatePicker
-        minDate={dayjs('1970.01.01')}
-        maxDate={dayjs('1980.01.01')}
+        value={step.start}
+        minDate={CHART_CONFIG.START_DEFAULT}
+        maxDate={CHART_CONFIG.END_DEFAULT}
         onChange={(el: Dayjs | null) => {
           if (el) {
-            setStep({ start: el.valueOf(), end: step.end });
-            //console.log(el.valueOf());
+            setStep({ start: el, end: step.end });
           }
         }}
       />
       <DatePicker
-        minDate={dayjs('1970.01.01')}
-        maxDate={dayjs('1980.01.01')}
+        value={step.end}
+        minDate={CHART_CONFIG.START_DEFAULT}
+        maxDate={CHART_CONFIG.END_DEFAULT}
         onChange={(el) => {
           if (el) {
-            setStep({ start: step.start, end: el.valueOf() });
-            //console.log(el.valueOf());
+            setStep({ start: step.start, end: el });
           }
         }}
       />
@@ -81,8 +68,8 @@ export const GridCharts = () => {
                 value.chartsState[ind],
                 sortByRange(
                   el.series[0].data,
-                  step ? step.start : CHART_CONFIG.START_DEFAULT,
-                  step ? step.end : CHART_CONFIG.END_DEFAULT
+                  step.start.valueOf(),
+                  step.end.valueOf()
                 )
               )}
             />

@@ -1,3 +1,5 @@
+import dayjs, { Dayjs } from 'dayjs';
+
 export const CHART_CONFIG = {
   COLORS: [
     '#2f7ed8',
@@ -13,6 +15,6 @@ export const CHART_CONFIG = {
   ],
   TYPES: ['line', 'spline', 'area'],
   DAY: 24 * 3600 * 1000,
-  START_DEFAULT: 24 * 3600 * 1000,
-  END_DEFAULT: 1000 * 24 * 3600 * 1000,
+  START_DEFAULT: dayjs('1970.01.01'),
+  END_DEFAULT: dayjs('1980.01.01'),
 };
