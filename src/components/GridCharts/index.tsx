@@ -11,15 +11,11 @@ import { CHART_CONFIG } from '../../chartData/chartConfig';
 
 import { changeDataSort } from '../../chartData/changeDataSort';
 
-import { IChart } from '../../chartData';
+import { IChart } from '../../interfaces/IChart';
+import { IStep } from '../../interfaces/IStep';
 
 export const GridCharts = () => {
   const value = useContext(Context);
-
-  interface IStep {
-    start: Dayjs;
-    end: Dayjs;
-  }
 
   const [step, setStep] = useState<IStep>({
     start: dayjs('1970.01.11'),
@@ -40,7 +36,7 @@ export const GridCharts = () => {
     <>
       <Grid container p={2}>
         {value.chartsState.length ? (
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={12} mb={3} ml={10}>
             <DatePicker
               value={step.start}
               minDate={CHART_CONFIG.START_DEFAULT}

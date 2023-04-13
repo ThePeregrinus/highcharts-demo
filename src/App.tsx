@@ -9,12 +9,7 @@ import { ViewMode } from './pages/VewMode';
 import { Setting } from './pages/Settings';
 import { charts } from './chartData';
 
-import { IChart } from './chartData';
-
-export interface ChartContextType {
-  chartsState: IChart[];
-  setChartsState: React.Dispatch<React.SetStateAction<IChart[]>>;
-}
+import { ChartContextType } from './interfaces/ChartContextType';
 
 export const Context = createContext({} as ChartContextType);
 

@@ -1,5 +1,5 @@
-import { IChart } from '.';
-import { ChartContextType } from '../App';
+import { IChart } from '../interfaces/IChart';
+import { ChartContextType } from '../interfaces/ChartContextType';
 
 export const changeDataOptions = (
   value: ChartContextType,

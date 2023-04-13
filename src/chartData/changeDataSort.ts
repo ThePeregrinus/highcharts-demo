@@ -1,4 +1,4 @@
-import { IChart } from '.';
+import { IChart } from '../interfaces/IChart';
 
 export const changeDataSort = (
   valueArray: IChart,

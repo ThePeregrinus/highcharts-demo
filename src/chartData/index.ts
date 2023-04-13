@@ -1,25 +1,5 @@
 import { CHART_CONFIG } from './chartConfig';
-
-export interface IChart {
-  title: {
-    text: string;
-  };
-  legend: {
-    enabled: boolean;
-  };
-  series: {
-    color: string;
-    type: string;
-    name: string;
-    pointInterval?: number;
-    pointIntervalUnit?: string;
-    pointStart?: number;
-    data: number[][];
-  }[];
-  xAxis: {
-    type?: string;
-  };
-}
+import { IChart } from '../interfaces/IChart';
 
 let data: Array<Array<number>> = [];
 

@@ -11,7 +11,7 @@ import {
   MenuItem,
 } from '@mui/material';
 
-import { ChartContextType } from '../../App';
+import { ChartContextType } from '../../interfaces/ChartContextType';
 import { changeDataOptions } from '../../chartData/changeDataOptions';
 import { CHART_CONFIG } from '../../chartData/chartConfig';
 
