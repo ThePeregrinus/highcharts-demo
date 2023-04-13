@@ -1,4 +1,4 @@
-import { CHART_CONFIG } from './chart-config';
+import { CHART_CONFIG } from './chartConfig';
 
 export interface IChart {
   title: {

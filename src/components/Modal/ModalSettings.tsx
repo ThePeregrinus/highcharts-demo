@@ -12,8 +12,8 @@ import {
 } from '@mui/material';
 
 import { ChartContextType } from '../../App';
-import { changeDatas } from '../../chartData/changeDatas';
-import { CHART_CONFIG } from '../../chartData/chart-config';
+import { changeDataOptions } from '../../chartData/changeDataOptions';
+import { CHART_CONFIG } from '../../chartData/chartConfig';
 
 export const ModalSettings = (props: {
   open: boolean;
@@ -31,37 +31,6 @@ export const ModalSettings = (props: {
   const [color, setColor] = useState(
     props.value.chartsState[props.id].series[0].color
   );
-
-  // const changeDatas = () => {
-  //   props.value.setChartsState(
-  //     props.value.chartsState.map((el, ind): IChart => {
-  //       if (props.id !== ind) {
-  //         return el;
-  //       } else {
-  //         return {
-  //           title: { text: `${name}` },
-  //           legend: {
-  //             enabled: false,
-  //           },
-
-  //           series: [
-  //             {
-  //               color: color,
-  //               type: type,
-  //               name: 'some useful value',
-  //               // pointInterval: el.series[0].pointInterval,
-  //               // pointStart: el.series[0].pointStart,
-  //               data: el.series[0].data,
-  //             },
-  //           ],
-  //           xAxis: {
-  //             type: 'datetime',
-  //           },
-  //         };
-  //       }
-  //     })
-  //   );
-  // };
 
   return (
     <Dialog open={props.open} fullWidth maxWidth="sm">
@@ -123,7 +92,7 @@ export const ModalSettings = (props: {
           variant="contained"
           onClick={() =>
             props.value.setChartsState(
-              changeDatas(props.value, props.id, name, color, type)
+              changeDataOptions(props.value, props.id, name, color, type)
             )
           }
         >

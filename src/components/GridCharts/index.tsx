@@ -1,16 +1,15 @@
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useContext, useState } from 'react';
 
 import Grid from '@mui/material/Grid'; // Grid version 1
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { Chart } from '../Chart';
 import { Context } from '../../App';
-import { CHART_CONFIG } from '../../chartData/chart-config';
+import { CHART_CONFIG } from '../../chartData/chartConfig';
 
-import { changeDatas } from '../../chartData/changeDatas';
-import { changeDatasEveryone } from '../../chartData/changeDatasEveryone';
+import { changeDataSort } from '../../chartData/changeDataSort';
 
 import { IChart } from '../../chartData';
 
@@ -22,7 +21,6 @@ export const GridCharts = () => {
     end: Dayjs;
   }
 
-  const [isEmpty, setIsEmpty] = useState(false);
   const [step, setStep] = useState<IStep>({
     start: CHART_CONFIG.START_DEFAULT,
     end: CHART_CONFIG.END_DEFAULT,
@@ -41,9 +39,7 @@ export const GridCharts = () => {
   return (
     <>
       <Grid container p={2}>
-        {isEmpty ? (
-          <></>
-        ) : (
+        {value.chartsState.length ? (
           <Grid item xs={12} sm={12}>
             <DatePicker
               value={step.start}
@@ -67,12 +63,14 @@ export const GridCharts = () => {
               }}
             />
           </Grid>
+        ) : (
+          <></>
         )}
 
         {value.chartsState.map((el: IChart, ind: number) => (
           <Grid item xs={12} sm={6} key={ind}>
             <Chart
-              {...changeDatasEveryone(
+              {...changeDataSort(
                 value.chartsState[ind],
                 sortByRange(
                   el.series[0].data,

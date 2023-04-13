@@ -1,7 +1,7 @@
 import { IChart } from '.';
 import { ChartContextType } from '../App';
 
-export const changeDatas = (
+export const changeDataOptions = (
   value: ChartContextType,
   id: number,
   name: string,

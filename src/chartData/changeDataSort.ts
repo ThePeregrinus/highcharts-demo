@@ -1,7 +1,6 @@
 import { IChart } from '.';
-import { ChartContextType } from '../App';
 
-export const changeDatasEveryone = (
+export const changeDataSort = (
   valueArray: IChart,
 
   data: Array<Array<number>>
