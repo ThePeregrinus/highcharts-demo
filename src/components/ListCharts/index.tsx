@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
 
-import Grid from '@mui/material/Grid';
+import { Grid, Container, Typography, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 import { Context } from '../../App';
 import { ModalSettings } from '../Modal/ModalSettings';
-
-import { IChart } from '../../chartData';
 
 export const ListCharts = () => {
   const value = useContext(Context);
@@ -30,25 +30,41 @@ export const ListCharts = () => {
 
   return (
     <>
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        style={{ minHeight: '100vh' }}
-      >
-        {value.chartsState.map((el, id) => (
-          <Grid
-            item
-            onClick={() => handleOpen(id)}
-            key={id}
-            style={{ cursor: 'pointer', userSelect: 'none' }}
-          >
-            {el.title.text}
-          </Grid>
-        ))}
-      </Grid>
-
+      <Container maxWidth="sm">
+        <Grid container>
+          {value.chartsState.map((el, id) => (
+            <>
+              <Grid
+                item
+                onClick={() => handleOpen(id)}
+                key={id}
+                style={{ cursor: 'pointer' }}
+                xs={8}
+              >
+                <Grid item container>
+                  <Grid item>
+                    <Typography variant="h4">{el.title.text}</Typography>;
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={2}>
+                <IconButton onClick={() => handleOpen(id)}>
+                  <EditIcon fontSize="large" />
+                </IconButton>
+              </Grid>
+              <Grid item xs={2}>
+                <IconButton
+                  onClick={() => {
+                    deleteByIndex(id);
+                  }}
+                >
+                  <DeleteIcon fontSize="large" />
+                </IconButton>
+              </Grid>
+            </>
+          ))}
+        </Grid>
+      </Container>
       {open && (
         <ModalSettings
           open={open}

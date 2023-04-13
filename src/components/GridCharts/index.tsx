@@ -22,7 +22,7 @@ export const GridCharts = () => {
     end: Dayjs;
   }
 
-  const [isEmtpy, setIsEmtpy] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
   const [step, setStep] = useState<IStep>({
     start: CHART_CONFIG.START_DEFAULT,
     end: CHART_CONFIG.END_DEFAULT,
@@ -40,27 +40,35 @@ export const GridCharts = () => {
 
   return (
     <>
-      <DatePicker
-        value={step.start}
-        minDate={CHART_CONFIG.START_DEFAULT}
-        maxDate={CHART_CONFIG.END_DEFAULT}
-        onChange={(el: Dayjs | null) => {
-          if (el) {
-            setStep({ start: el, end: step.end });
-          }
-        }}
-      />
-      <DatePicker
-        value={step.end}
-        minDate={CHART_CONFIG.START_DEFAULT}
-        maxDate={CHART_CONFIG.END_DEFAULT}
-        onChange={(el) => {
-          if (el) {
-            setStep({ start: step.start, end: el });
-          }
-        }}
-      />
-      <Grid container>
+      <Grid container p={2}>
+        {isEmpty ? (
+          <></>
+        ) : (
+          <Grid item xs={12} sm={12}>
+            <DatePicker
+              value={step.start}
+              minDate={CHART_CONFIG.START_DEFAULT}
+              maxDate={CHART_CONFIG.END_DEFAULT}
+              onChange={(el: Dayjs | null) => {
+                if (el) {
+                  setStep({ start: el, end: step.end });
+                }
+              }}
+            />
+
+            <DatePicker
+              value={step.end}
+              minDate={CHART_CONFIG.START_DEFAULT}
+              maxDate={CHART_CONFIG.END_DEFAULT}
+              onChange={(el) => {
+                if (el) {
+                  setStep({ start: step.start, end: el });
+                }
+              }}
+            />
+          </Grid>
+        )}
+
         {value.chartsState.map((el: IChart, ind: number) => (
           <Grid item xs={12} sm={6} key={ind}>
             <Chart
