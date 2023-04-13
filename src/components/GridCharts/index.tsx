@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 
 import Grid from '@mui/material/Grid'; // Grid version 1
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
@@ -22,8 +22,8 @@ export const GridCharts = () => {
   }
 
   const [step, setStep] = useState<IStep>({
-    start: CHART_CONFIG.START_DEFAULT,
-    end: CHART_CONFIG.END_DEFAULT,
+    start: dayjs('1970.01.11'),
+    end: dayjs('1970.05.23'),
   });
 
   const sortByRange = (

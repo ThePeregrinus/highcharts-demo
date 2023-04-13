@@ -16,5 +16,5 @@ export const CHART_CONFIG = {
   TYPES: ['line', 'spline', 'area'],
   DAY: 24 * 3600 * 1000,
   START_DEFAULT: dayjs('1970.01.01'),
-  END_DEFAULT: dayjs('1980.01.01'),
+  END_DEFAULT: dayjs('1971.01.01'),
 };
