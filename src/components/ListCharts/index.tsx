@@ -43,7 +43,7 @@ export const ListCharts = () => {
               >
                 <Grid item container>
                   <Grid item>
-                    <Typography variant="h4">{el.title.text}</Typography>;
+                    <Typography variant="h4">{el.title.text}</Typography>
                   </Grid>
                 </Grid>
               </Grid>
