@@ -7,7 +7,10 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
 const namePages = ['View mode', 'Settings'];
-const PagesConfig = { 'View mode': '/', Settings: '/settings' };
+const PagesConfig = {
+  'View mode': 'natlex-task/',
+  Settings: 'natlex-task/settings',
+};
 
 export const Header = () => {
   return (

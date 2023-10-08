@@ -21,7 +21,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route
-            path="/"
+            path="/natlex-task"
             element={
               <Context.Provider value={{ chartsState, setChartsState }}>
                 <ViewMode />
@@ -29,7 +29,7 @@ const App = () => {
             }
           />
           <Route
-            path="/settings"
+            path="/natlex-task/settings"
             element={
               <Context.Provider value={{ chartsState, setChartsState }}>
                 <Setting />
